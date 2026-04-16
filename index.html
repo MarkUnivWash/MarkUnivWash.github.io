@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DentAI — AI Systems for Dental Practices</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --blue:#016FD0;
+    --blue-dark:#0058A8;
+    --blue-light:#E8F3FC;
+    --blue-mid:#C2DCF7;
+    --bg:#FFFFFF;
+    --bg2:#F4F8FD;
+    --bg3:#EAF2FB;
+    --text:#0A1929;
+    --muted:#4A6580;
+    --border:rgba(1,111,208,0.15);
+    --card:#FFFFFF;
+  }
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 2rem;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(1,111,208,0.12);box-shadow:0 1px 24px rgba(1,111,208,0.06)}
+  .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:0.05em;color:var(--blue)}
+  .nav-logo span{color:var(--text)}
+  .nav-links{display:flex;gap:2rem;align-items:center}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:0.9rem;font-weight:400;transition:color 0.2s}
+  .nav-links a:hover{color:var(--blue)}
+  .nav-cta{background:var(--blue);color:#fff;font-weight:500;padding:0.55rem 1.4rem;border-radius:6px;text-decoration:none;font-size:0.9rem;transition:background 0.2s}
+  .nav-cta:hover{background:var(--blue-dark)}
+
+  /* HERO */
+  .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:8rem 2rem 4rem;max-width:1200px;margin:0 auto;position:relative}
+  .hero-eyebrow{font-family:'DM Mono',monospace;font-size:0.78rem;letter-spacing:0.18em;color:var(--blue);text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:0.8rem}
+  .hero-eyebrow::before{content:'';display:block;width:32px;height:2px;background:var(--blue)}
+  .hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,10vw,9rem);line-height:0.95;letter-spacing:0.02em;margin-bottom:2rem;max-width:900px;color:var(--text)}
+  .hero h1 em{font-style:normal;color:var(--blue)}
+  .hero-sub{font-size:1.1rem;color:var(--muted);max-width:560px;margin-bottom:3rem;line-height:1.7;font-weight:300}
+  .hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+  .btn-primary{background:var(--blue);color:#fff;font-weight:500;padding:0.9rem 2rem;border-radius:6px;text-decoration:none;font-size:1rem;transition:all 0.2s;border:none;cursor:pointer;display:inline-block}
+  .btn-primary:hover{background:var(--blue-dark);transform:translateY(-1px)}
+  .btn-secondary{border:2px solid var(--blue);color:var(--blue);padding:0.9rem 2rem;border-radius:6px;text-decoration:none;font-size:1rem;transition:all 0.2s;background:transparent;display:inline-block}
+  .btn-secondary:hover{background:var(--blue-light);transform:translateY(-1px)}
+
+  /* HERO BG GRID */
+  .hero-bg{position:absolute;inset:0;z-index:-1;overflow:hidden}
+  .hero-bg::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(1,111,208,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(1,111,208,0.04) 1px,transparent 1px);background-size:60px 60px}
+  .hero-bg::after{content:'';position:absolute;top:-100px;right:-200px;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(1,111,208,0.08) 0%,transparent 70%)}
+
+  /* STATS BAR */
+  .stats-bar{background:var(--blue);color:#fff}
+  .stats-inner{max-width:1200px;margin:0 auto;padding:2.5rem 2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem}
+  .stat{text-align:center}
+  .stat-num{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:#fff;line-height:1;letter-spacing:0.02em}
+  .stat-label{font-size:0.85rem;color:rgba(255,255,255,0.75);margin-top:0.4rem;line-height:1.4}
+  .stat-note{display:block;font-size:0.75rem;color:rgba(255,255,255,0.45);margin-top:0.2rem}
+
+  /* DIVIDER */
+  .divider{height:1px;background:rgba(1,111,208,0.1);max-width:1200px;margin:0 auto}
+
+  /* SECTION */
+  section{padding:6rem 2rem}
+  .container{max-width:1200px;margin:0 auto}
+  .section-label{font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.15em;color:var(--blue);text-transform:uppercase;margin-bottom:1rem}
+  .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4.5rem);line-height:1;margin-bottom:1.5rem;color:var(--text)}
+  .section-sub{color:var(--muted);font-size:1rem;max-width:520px;line-height:1.7;font-weight:300}
+
+  /* SERVICES */
+  .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:4rem}
+  .service-card{background:var(--card);border:1px solid rgba(1,111,208,0.15);border-radius:12px;padding:2rem;position:relative;overflow:hidden;transition:border-color 0.3s,transform 0.2s,box-shadow 0.2s}
+  .service-card:hover{border-color:rgba(1,111,208,0.4);transform:translateY(-3px);box-shadow:0 12px 40px rgba(1,111,208,0.1)}
+  .service-card.featured{border-color:var(--blue);border-width:2px;background:linear-gradient(135deg,rgba(1,111,208,0.03),#fff)}
+  .service-tag{position:absolute;top:1.2rem;right:1.2rem;background:var(--blue);color:#fff;font-size:0.65rem;font-weight:500;padding:0.25rem 0.7rem;border-radius:4px;letter-spacing:0.05em;text-transform:uppercase}
+  .service-icon{width:44px;height:44px;border-radius:10px;background:var(--blue-light);display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem}
+  .service-icon svg{width:22px;height:22px;stroke:var(--blue);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+  .service-name{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.03em;margin-bottom:0.5rem;color:var(--text)}
+  .service-desc{color:var(--muted);font-size:0.9rem;line-height:1.6;margin-bottom:1.5rem;font-weight:300}
+  .service-pricing{display:flex;gap:1.5rem;border-top:1px solid rgba(1,111,208,0.1);padding-top:1.2rem}
+  .price-item small{display:block;font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.2rem}
+  .price-item strong{font-family:'DM Mono',monospace;font-size:1rem;color:var(--blue)}
+
+  /* PITCH */
+  .pitch-block{background:var(--blue-light);border:1px solid var(--blue-mid);border-left:4px solid var(--blue);border-radius:12px;padding:3rem;margin-top:4rem;position:relative}
+  .pitch-mark{position:absolute;top:-1rem;left:2rem;font-family:'Bebas Neue',sans-serif;font-size:6rem;color:var(--blue);opacity:0.12;line-height:1}
+  .pitch-text{font-size:1.15rem;line-height:1.8;color:var(--text);font-weight:300;position:relative;z-index:1}
+  .pitch-text strong{color:var(--blue);font-weight:500}
+  .pitch-source{margin-top:1.5rem;font-size:0.8rem;color:var(--muted);font-family:'DM Mono',monospace}
+
+  /* ECONOMICS */
+  .econ-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:4rem}
+  @media(max-width:640px){.econ-grid{grid-template-columns:1fr}}
+  .econ-card{background:#fff;border:1px solid rgba(1,111,208,0.15);border-radius:12px;padding:2rem;box-shadow:0 4px 24px rgba(1,111,208,0.06)}
+  .econ-card h3{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:0.03em;margin-bottom:1.5rem;color:var(--blue)}
+  .econ-row{display:flex;justify-content:space-between;align-items:baseline;padding:0.65rem 0;border-bottom:1px solid rgba(1,111,208,0.06);font-size:0.9rem}
+  .econ-row:last-child{border-bottom:none}
+  .econ-label{color:var(--muted);font-weight:300}
+  .econ-val{font-family:'DM Mono',monospace;color:var(--text);font-size:0.95rem}
+  .econ-val.highlight{color:var(--blue);font-size:1.1rem;font-weight:500}
+
+  /* TIMELINE */
+  .timeline{margin-top:4rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem}
+  .timeline-phase{background:#fff;border:1px solid rgba(1,111,208,0.15);border-top:3px solid var(--blue);border-radius:12px;padding:1.8rem;box-shadow:0 2px 12px rgba(1,111,208,0.05)}
+  .phase-days{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--blue);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem}
+  .phase-items{list-style:none}
+  .phase-items li{font-size:0.88rem;color:var(--muted);padding:0.4rem 0;border-bottom:1px solid rgba(1,111,208,0.05);font-weight:300;display:flex;gap:0.6rem;line-height:1.4}
+  .phase-items li:last-child{border-bottom:none}
+  .phase-items li::before{content:'→';color:var(--blue);flex-shrink:0;font-size:0.8rem;margin-top:0.05rem}
+
+  /* HOW */
+  .how-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;margin-top:4rem}
+  .how-card{padding:1.8rem;border-left:3px solid var(--blue);background:#fff;border-radius:0 10px 10px 0;box-shadow:0 2px 12px rgba(1,111,208,0.06)}
+  .how-num{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:rgba(1,111,208,0.18);line-height:1;margin-bottom:0.5rem}
+  .how-title{font-size:1rem;font-weight:500;margin-bottom:0.5rem;color:var(--text)}
+  .how-desc{font-size:0.88rem;color:var(--muted);font-weight:300;line-height:1.6}
+
+  /* CTA */
+  .cta-section{text-align:center;padding:8rem 2rem;background:var(--blue);color:#fff;position:relative;overflow:hidden}
+  .cta-section::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,0.06) 0%,transparent 70%);pointer-events:none}
+  .cta-eyebrow{font-family:'DM Mono',monospace;font-size:0.75rem;letter-spacing:0.15em;color:rgba(255,255,255,0.6);text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;gap:0.8rem}
+  .cta-eyebrow::before,.cta-eyebrow::after{content:'';display:block;width:24px;height:1px;background:rgba(255,255,255,0.4)}
+  .cta-headline{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,7rem);line-height:0.95;margin-bottom:1.5rem;color:#fff}
+  .cta-sub{color:rgba(255,255,255,0.75);max-width:480px;margin:0 auto 3rem;font-size:1rem;font-weight:300}
+  .btn-white{background:#fff;color:var(--blue);font-weight:500;padding:1rem 2.5rem;border-radius:6px;text-decoration:none;font-size:1.05rem;transition:all 0.2s;display:inline-block}
+  .btn-white:hover{background:rgba(255,255,255,0.9);transform:translateY(-1px)}
+  .cta-note{margin-top:1.5rem;font-size:0.8rem;color:rgba(255,255,255,0.45);font-family:'DM Mono',monospace}
+
+  /* FOOTER */
+  footer{background:var(--text);color:rgba(255,255,255,0.5);padding:2rem;text-align:center;font-size:0.8rem;font-family:'DM Mono',monospace}
+  footer span{color:rgba(255,255,255,0.25);display:block;margin-top:0.4rem}
+
+  /* ANIMATIONS */
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+  .hero-eyebrow{animation:fadeUp 0.6s ease both}
+  .hero h1{animation:fadeUp 0.6s 0.1s ease both}
+  .hero-sub{animation:fadeUp 0.6s 0.2s ease both}
+  .hero-actions{animation:fadeUp 0.6s 0.3s ease both}
+
+  /* RESPONSIVE */
+  @media(max-width:768px){
+    .nav-links{display:none}
+    .hero h1{font-size:clamp(3rem,12vw,6rem)}
+    section{padding:4rem 1.5rem}
+    .stats-inner{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Dent<span>AI</span></div>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#economics">Economics</a>
+    <a href="#process">Process</a>
+    <a href="#audit" class="nav-cta">Get Free Audit</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="padding:0">
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-eyebrow">AI Systems for Dental Practices</div>
+    <h1>Your front desk<br>misses <em>35%</em><br>of calls.</h1>
+    <p class="hero-sub">We fix that — permanently. AI voice agents, booking automation, and patient re-engagement systems built exclusively for dental and orthodontic practices.</p>
+    <div class="hero-actions">
+      <a href="#audit" class="btn-primary">Get Your Free AI Audit</a>
+      <a href="#services" class="btn-secondary">See What We Build</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat">
+      <div class="stat-num">35%</div>
+      <div class="stat-label">of calls go unanswered<span class="stat-note">industry average</span></div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">$150K</div>
+      <div class="stat-label">lost annually per practice<span class="stat-note">from missed calls alone</span></div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">$30K</div>
+      <div class="stat-label">patient lifetime value<span class="stat-note">general + cosmetic dentistry</span></div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">60s</div>
+      <div class="stat-label">lead response time<span class="stat-note">vs. industry avg of 47 hrs</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="section-label">What We Build</div>
+    <h2 class="section-title">One system.<br>Every lead captured.</h2>
+    <p class="section-sub">We start with the highest-ROI service and expand from there. Most clients add a second system within 60 days.</p>
+
+    <div class="services-grid">
+      <div class="service-card featured">
+        <div class="service-tag">Start Here</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.05 9.82a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.72 6.72l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 15v1.92z"/></svg>
+        </div>
+        <div class="service-name">AI Voice Agent</div>
+        <div class="service-desc">Answers every call 24/7. Qualifies the patient, books the appointment, sends a confirmation text. Your front desk never misses a lead again.</div>
+        <div class="service-pricing">
+          <div class="price-item"><small>Setup</small><strong>$5K–$12K</strong></div>
+          <div class="price-item"><small>Monthly</small><strong>$2K–$4K/mo</strong></div>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <div class="service-name">AI SDR Agent</div>
+        <div class="service-desc">Follows up on new patient inquiries within 60 seconds via SMS and email. Re-engages patients who ghosted after an estimate.</div>
+        <div class="service-pricing">
+          <div class="price-item"><small>Setup</small><strong>$3K–$6K</strong></div>
+          <div class="price-item"><small>Monthly</small><strong>$2K–$4K/mo</strong></div>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="service-name">AI Email Agent</div>
+        <div class="service-desc">Automated recall sequences, treatment follow-ups, and reactivation campaigns for lapsed patients — all in your brand voice.</div>
+        <div class="service-pricing">
+          <div class="price-item"><small>Setup</small><strong>$2K–$4K</strong></div>
+          <div class="price-item"><small>Monthly</small><strong>$1.5K–$3K/mo</strong></div>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div class="service-name">AI Content Agent</div>
+        <div class="service-desc">30 days of Instagram, Facebook, and Google posts per month in your practice's brand voice — generated and scheduled automatically.</div>
+        <div class="service-pricing">
+          <div class="price-item"><small>Setup</small><strong>$2.5K–$5K</strong></div>
+          <div class="price-item"><small>Monthly</small><strong>$1.5K–$3K/mo</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pitch-block">
+      <div class="pitch-mark">"</div>
+      <p class="pitch-text">
+        "Your front desk misses <strong>35% of calls</strong>. My AI voice agent answers every single one, books the appointment, and sends a confirmation text — without your staff lifting a finger. If one new patient is worth <strong>$5,000</strong> and my system captures 10 extra per month, that's <strong>$50,000 in new revenue</strong>. My retainer is $3,000/month. <strong>You ROI in week one.</strong>"
+      </p>
+      <div class="pitch-source">— Sample close · works for GPs, orthodontists, and multi-location DSOs</div>
+    </div>
+  </div>
+</section>
+
+<!-- ECONOMICS -->
+<section id="economics" style="background:var(--bg2)">
+  <div class="container">
+    <div class="section-label">The Numbers</div>
+    <h2 class="section-title">95% margin.<br>From day one.</h2>
+    <p class="section-sub">Software costs ~$150/month per client. Everything else is profit.</p>
+
+    <div class="econ-grid">
+      <div class="econ-card">
+        <h3>Per-Client Economics</h3>
+        <div class="econ-row"><span class="econ-label">Avg setup fee (one-time)</span><span class="econ-val">$5,000</span></div>
+        <div class="econ-row"><span class="econ-label">Avg monthly retainer</span><span class="econ-val">$3,000/mo</span></div>
+        <div class="econ-row"><span class="econ-label">Software cost per client</span><span class="econ-val">~$150/mo</span></div>
+        <div class="econ-row"><span class="econ-label">Monthly profit per client</span><span class="econ-val highlight">~$2,850</span></div>
+        <div class="econ-row"><span class="econ-label">Client LTV at 12 months</span><span class="econ-val highlight">~$41,000</span></div>
+      </div>
+      <div class="econ-card">
+        <h3>Year 1 Projection</h3>
+        <div class="econ-row"><span class="econ-label">New clients/month</span><span class="econ-val">1–2 to start</span></div>
+        <div class="econ-row"><span class="econ-label">Active clients by Month 12</span><span class="econ-val">~13</span></div>
+        <div class="econ-row"><span class="econ-label">Setup revenue Year 1</span><span class="econ-val">$90,000</span></div>
+        <div class="econ-row"><span class="econ-label">Retainer revenue Year 1</span><span class="econ-val">$216,000</span></div>
+        <div class="econ-row"><span class="econ-label">Total Year 1 revenue</span><span class="econ-val highlight">$306,000</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="container">
+    <div class="section-label">How We Work</div>
+    <h2 class="section-title">The audit closes<br>the deal.</h2>
+    <p class="section-sub">We lead with value. The math does the selling.</p>
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-num">01</div>
+        <div class="how-title">Free AI Audit</div>
+        <div class="how-desc">We pull up your Google profile, call volume data, and reviews — then show you exactly what missed calls are costing you every single month.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">02</div>
+        <div class="how-title">Live Presentation</div>
+        <div class="how-desc">60 minutes on Zoom or in person. We walk through the numbers, the system, and every question you have. Close rate: 30–50%.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">03</div>
+        <div class="how-title">Fast Build</div>
+        <div class="how-desc">We begin building immediately after signing. Most practices are live within two weeks. Results show up on the schedule by week three.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">04</div>
+        <div class="how-title">Expand & Scale</div>
+        <div class="how-desc">Start with the voice agent. Once results are proven, we layer in SDR, email, and content — compounding the ROI month after month.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section style="background:var(--bg2)">
+  <div class="container">
+    <div class="section-label">90-Day Launch Plan</div>
+    <h2 class="section-title">From zero to<br>$10K/month.</h2>
+    <p class="section-sub">A proven roadmap. Clear milestones. No guesswork.</p>
+    <div class="timeline">
+      <div class="timeline-phase">
+        <div class="phase-days">Days 1–14 · Foundation</div>
+        <ul class="phase-items">
+          <li>Set up full tech stack ($150–300/mo total)</li>
+          <li>Build AI voice agent template for dental intake</li>
+          <li>Create the audit deck and audit process</li>
+          <li>Build prospect list of 300–500 offices</li>
+        </ul>
+      </div>
+      <div class="timeline-phase">
+        <div class="phase-days">Days 15–30 · Outreach</div>
+        <ul class="phase-items">
+          <li>Send 50–100 cold emails per day</li>
+          <li>LinkedIn outreach to practice owners</li>
+          <li>Book first 3–5 discovery calls</li>
+          <li>Run AI audits and close first client</li>
+        </ul>
+      </div>
+      <div class="timeline-phase">
+        <div class="phase-days">Days 31–60 · Proof</div>
+        <ul class="phase-items">
+          <li>Launch first client system live</li>
+          <li>Document results for case study</li>
+          <li>"40 extra patients in 30 days" story built</li>
+          <li>Close clients 2 and 3</li>
+        </ul>
+      </div>
+      <div class="timeline-phase">
+        <div class="phase-days">Days 61–90 · Scale</div>
+        <ul class="phase-items">
+          <li>3–6 active clients at $10K–$20K/mo</li>
+          <li>Hire a VA for ops ($500–800/mo)</li>
+          <li>Systematize onboarding flow</li>
+          <li>Upsell email agent to voice clients</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="audit" class="cta-section">
+  <div class="container">
+    <div class="cta-eyebrow">200,000+ dental practices · We need 15</div>
+    <h2 class="cta-headline">Stop leaving<br>$150K/year<br>on the table.</h2>
+    <p class="cta-sub">Book a free 60-minute AI audit. We'll show you exactly what your missed calls cost — and exactly how to fix it.</p>
+    <a href="mailto:hello@dentai.io" class="btn-white">Book Your Free Audit</a>
+    <p class="cta-note">No commitment · No sales pressure · Just the numbers</p>
+  </div>
+</section>
+
+<footer>
+  <div style="color:rgba(255,255,255,0.6)">© 2026 DentAI · Seattle, WA · hello@dentai.io</div>
+  <span>Confidential — Not for distribution</span>
+</footer>
+
+</body>
+</html>
