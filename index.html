@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mark Daniel — Data Scientist</title>
+<meta name="description" content="Mark Daniel, data scientist in Seattle. Experimentation, causal inference, and agentic AI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#E8F0E7;
+    --ink:#14251C;
+    --moss:#3C8A62;
+    --deep:#0E2019;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"IBM Plex Sans",system-ui,sans-serif;
+    font-size:17px;
+    line-height:1.55;
+  }
+  .page{max-width:940px;margin:0 auto;padding:0 24px 96px}
+  img{display:block;width:100%;height:auto}
+
+  header{padding:40px 0 0}
+  .banner{border-radius:6px;overflow:hidden}
+
+  .intro{
+    max-width:52ch;
+    margin:36px 0 56px;
+    font-size:19px;
+  }
+  .intro span{color:var(--moss)}
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:28px;
+  }
+  .tile{
+    text-decoration:none;
+    color:inherit;
+    display:block;
+  }
+  .tile img{border-radius:6px}
+  .tile figcaption{
+    margin:12px 2px 0;
+    font-size:15px;
+  }
+  .tile b{font-weight:600;display:block}
+  .tile span{color:var(--moss)}
+  .tile:hover img{opacity:.88}
+  .tile:focus-visible{outline:2px solid var(--moss);outline-offset:6px;border-radius:8px}
+
+  .papers{
+    margin:64px 0 0;
+    padding-top:28px;
+    border-top:1px solid rgba(20,37,28,.18);
+    max-width:64ch;
+    font-size:15px;
+  }
+  .papers p{margin:0 0 14px}
+  .papers em{color:var(--moss);font-style:normal}
+
+  footer{
+    margin-top:56px;
+    font-size:15px;
+  }
+  footer a{color:var(--ink)}
+  a{color:var(--moss)}
+
+  @media (max-width:640px){
+    .grid{grid-template-columns:1fr;gap:24px}
+    .intro{font-size:18px;margin:28px 0 40px}
+    body{font-size:16px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <img class="banner" src="assets/banner.png" alt="Mark Daniel — Data Scientist">
+  </header>
+
+  <p class="intro">
+    I build systems that answer causal questions, and systems that act on the
+    answers. Currently a data scientist at Nordstrom, working on experimentation
+    and forecasting. Previously hospital research at Seattle Children's.
+  </p>
+
+  <div class="grid">
+
+    <a class="tile" href="https://github.com/MarkUnivWash">
+      <figure style="margin:0">
+        <img src="assets/lila.png" alt="Waveform illustration">
+        <figcaption>
+          <b>Lila AI</b>
+          <span>A voice agent that answers dental office phone lines and books appointments.</span>
+        </figcaption>
+      </figure>
+    </a>
+
+    <a class="tile" href="https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2835086">
+      <figure style="margin:0">
+        <img src="assets/causal.png" alt="Event study plot">
+        <figcaption>
+          <b>Hospital mergers</b>
+          <span>Staggered difference-in-differences on pediatric service availability.</span>
+        </figcaption>
+      </figure>
+    </a>
+
+    <a class="tile" href="https://www.linkedin.com/in/mark-ral-">
+      <figure style="margin:0">
+        <img src="assets/experiment.png" alt="A/B split illustration">
+        <figcaption>
+          <b>Experimentation at Nordstrom</b>
+          <span>A/B design for in-season merchandising decisions.</span>
+        </figcaption>
+      </figure>
+    </a>
+
+    <a class="tile" href="https://github.com/MarkUnivWash">
+      <figure style="margin:0">
+        <img src="assets/tldhuber.png" alt="Transcript search illustration">
+        <figcaption>
+          <b>TLDhubeR</b>
+          <span>Retrieval-augmented search across podcast transcripts.</span>
+        </figcaption>
+      </figure>
+    </a>
+
+  </div>
+
+  <section class="papers">
+    <p>McDaniel CE, Seryozhenkov E, Dever R, Ralston Daniel M, et al.
+       Characteristics of US Rural Hospitals by General Pediatric Care Availability, 2023.
+       <em>Academic Pediatrics</em>, 2026.</p>
+    <p>McDaniel CE, Ralston Daniel M, Freyleue SD, Seryozhenkov E, et al.
+       Identifying Inpatient Pediatric Services Across National Datasets.
+       <em>JAMA Network Open</em>, 2025;8(6):e2513527.</p>
+  </section>
+
+  <footer>
+    <a href="https://www.linkedin.com/in/mark-ral-">LinkedIn</a> &nbsp;
+    <a href="https://github.com/MarkUnivWash">GitHub</a> &nbsp;
+    <a href="mailto:markralstondaniel@gmail.com">markralstondaniel@gmail.com</a>
+  </footer>
+
+</div>
+</body>
+</html>
